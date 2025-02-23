@@ -14,7 +14,7 @@ OptParm.Input.Wavelength = 1050;
 OptParm.Input.Polarization = 'TM';
 OptParm.Optimization.Target = [1];
 OptParm.Geometry.Thickness = 325; % Device layer thickness
-g
+g % DKS: WHAT IS THIS???
 % Compute necessary period corresponding to target angle
 period = [OptParm.Input.Wavelength*OptParm.Optimization.Target/(sind(target_angle)-sind(OptParm.Input.Theta)),0.5*OptParm.Input.Wavelength];
 OptParm.Geometry.Period = period;
