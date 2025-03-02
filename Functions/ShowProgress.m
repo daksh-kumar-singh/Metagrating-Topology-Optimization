@@ -6,7 +6,17 @@ function [] = ShowProgress(OptParm, Grid, Pattern, iter, MaxIterations, Absolute
     if Display.PlotGeometry % Plot geometry
         set(groot,'CurrentFigure',FigGeo);
         imagesc(Grid{1}, Grid{2},Pattern'); colorbar; daspect([1 1 1]);
-        drawnow; 
+        drawnow;
+
+        % Define the folder for saving images
+        save_folder = fullfile('..', 'Topology_Iter_Images');
+        if ~exist(save_folder, 'dir')
+            mkdir(save_folder);
+        end
+
+        % Save Figure 1 (Topology) at each iteration
+        filename = fullfile(save_folder, sprintf('Topology_Iter_%04d.png', iter));
+        saveas(FigGeo, filename);
     end
     
     if Display.ShowText % Print efficiencies
@@ -39,6 +49,20 @@ function [] = ShowProgress(OptParm, Grid, Pattern, iter, MaxIterations, Absolute
             set(gca, 'linewidth',2, 'fontsize', 20);
             drawnow
         end
+    end
+
+    % Save final efficiency data as CSV in Topology_Efficiencies folder
+    if iter == MaxIterations
+        efficiency_folder = fullfile('..', 'Topology_Efficiencies');
+        if ~exist(efficiency_folder, 'dir')
+            mkdir(efficiency_folder);
+        end
+        
+        absolute_eff_filename = fullfile(efficiency_folder, 'Absolute_Efficiencies.csv');
+        relative_eff_filename = fullfile(efficiency_folder, 'Relative_Efficiencies.csv');
+        
+        writematrix(mean(AbsoluteEfficiency(1:iter,:,:),3)', absolute_eff_filename);
+        writematrix(mean(RelativeEfficiency(1:iter,:,:),3)', relative_eff_filename);
     end
     
 end
