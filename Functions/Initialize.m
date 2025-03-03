@@ -21,7 +21,7 @@ OptParm.Simulation.ZGrid = 50; % Number of slices in device layer at which field
 
 OptParm.Optimization.Target = 1; % Target diffraction order in the x-direction for each polarization i.e. [1 -1]
 
-OptParm.Optimization.Iterations = 1; % Max iterations 
+OptParm.Optimization.Iterations = 500; % Max iterations 
 OptParm.Optimization.Gradient.StepSize = 0.1; % Initial gradient step size
 OptParm.Optimization.Gradient.StepDecline = 0.992; % Multiplying factor that decreases step size each iteration
 
