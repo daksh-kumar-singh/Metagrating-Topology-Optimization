@@ -3,17 +3,37 @@ function [] = ShowProgress(OptParm, Grid, Pattern, iter, MaxIterations, Absolute
     if isfield(Figs, 'FigGeo')
         FigGeo = Figs.FigGeo;
     end
+    % if Display.PlotGeometry % Plot geometry
+    %     set(groot,'CurrentFigure',FigGeo);
+    %     % imagesc(Grid{1}, Grid{2},Pattern'); colorbar; daspect([1 1 1]);
+    %     imagesc(Grid{1}, Grid{2},Pattern'); daspect([1 1 1]);
+    %     drawnow;
+    % 
+    %     % Define the folder for saving images
+    %     save_folder = fullfile('..', 'Topology_Iter_Images');
+    %     if ~exist(save_folder, 'dir')
+    %         mkdir(save_folder);
+    %     end
+    % 
+    %     % Save Figure 1 (Topology) at each iteration
+    %     filename = fullfile(save_folder, sprintf('Topology_Iter_%04d.png', iter));
+    %     saveas(FigGeo, filename);
+    % end
+
     if Display.PlotGeometry % Plot geometry
         set(groot,'CurrentFigure',FigGeo);
-        imagesc(Grid{1}, Grid{2},Pattern'); colorbar; daspect([1 1 1]);
-        drawnow;
-
+        imagesc(Grid{1}, Grid{2},Pattern'); 
+        axis off; % Remove axes
+        colorbar off; % Remove colorbar
+        daspect([1 1 1]);
+        drawnow; 
+        
         % Define the folder for saving images
         save_folder = fullfile('..', 'Topology_Iter_Images');
         if ~exist(save_folder, 'dir')
             mkdir(save_folder);
         end
-
+        
         % Save Figure 1 (Topology) at each iteration
         filename = fullfile(save_folder, sprintf('Topology_Iter_%04d.png', iter));
         saveas(FigGeo, filename);
